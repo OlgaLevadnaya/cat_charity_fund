@@ -472,6 +472,7 @@ def test_update_charity_with_unexpected_fields(superuser_client,
         PROJECT_DETAILS_URL.format(project_id=charity_project.id),
         json=json_data
     )
+
     assert response.status_code == 422, (
         'Убедитесь, что при редактировании проекта невозможно изменить '
         'значения полей, редактирование которых не предусмотрено '

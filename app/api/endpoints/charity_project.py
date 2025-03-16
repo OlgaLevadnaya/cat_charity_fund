@@ -1,3 +1,5 @@
+import logging
+
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -38,6 +40,7 @@ async def create_new_charity_project(
     new_charity_project = await make_investments(
         new_charity_project, Donation, session
     )
+    logging.info(f'Проект {new_charity_project.name} создан')
     return new_charity_project
 
 
@@ -67,6 +70,7 @@ async def delete_charity_project(
     charity_project = await charity_project_crud.remove(
         charity_project, session
     )
+    logging.info(f'Проект {charity_project.name} удален')
     return charity_project
 
 
@@ -91,4 +95,5 @@ async def update_charity_project(
         session=session
     )
     charity_project = await check_project_is_close(charity_project, session)
+    logging.info(f'Проект {charity_project.name} изменен')
     return charity_project

@@ -1,3 +1,5 @@
+import logging
+
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -31,6 +33,7 @@ async def create_new_donation(
     new_donation = await make_investments(
         new_donation, CharityProject, session
     )
+    logging.info(f'Внесено пожертвование в размере {new_donation.full_amount}')
     return new_donation
 
 
